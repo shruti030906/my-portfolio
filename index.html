@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shruti Chandra — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep:   #060410;
+    --bg-card:   rgba(80,40,140,0.10);
+    --bg-card-h: rgba(100,55,170,0.18);
+    --purple:    #7c3aed;
+    --purple-l:  #9f62f5;
+    --accent:    #a855f7;
+    --accent2:   #c084fc;
+    --text:      #f0eaf8;
+    --muted:     #8b7aa8;
+    --border:    rgba(124,58,237,0.22);
+    --border-h:  rgba(168,85,247,0.45);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg-deep);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+  #stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(6,4,16,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+  .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:var(--accent);letter-spacing:.05em;}
+  .nav-links{display:flex;gap:2.2rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;}
+  .nav-links a:hover{color:#fff;}
+
+  section{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;}
+  .container{width:100%;max-width:1200px;margin:0 auto;padding:0 3rem;}
+
+  .sec-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3rem);color:#fff;margin-bottom:.5rem;}
+  .sec-line{width:56px;height:3px;background:linear-gradient(90deg,var(--purple),var(--accent2));border-radius:2px;margin-bottom:3rem;}
+
+  /* HERO */
+  #home{padding-top:80px;background:radial-gradient(ellipse 65% 55% at 55% 50%,rgba(76,29,149,.18) 0%,transparent 70%);}
+  .hero-wrap{padding:4rem 0;position:relative;}
+  .hero-name{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(4.5rem,11vw,8.5rem);line-height:1;color:#fff;letter-spacing:-.02em;}
+  .hero-name .colored{background:linear-gradient(90deg,#a78bfa,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .cursor{display:inline-block;width:4px;height:.85em;background:var(--accent2);vertical-align:baseline;margin-left:3px;animation:blink 1s step-end infinite;border-radius:2px;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .hero-tagline{margin:1.3rem 0 1.5rem;font-size:1.05rem;color:var(--muted);letter-spacing:.06em;}
+  .hero-bio{max-width:600px;font-size:1rem;line-height:1.8;color:rgba(240,234,248,.75);margin-bottom:2.5rem;}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn-primary{background:var(--purple);color:#fff;border:none;padding:.75rem 1.9rem;border-radius:8px;font-size:.95rem;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:background .2s,transform .15s;}
+  .btn-primary:hover{background:var(--purple-l);transform:translateY(-2px);}
+  .btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(124,58,237,.5);padding:.75rem 1.9rem;border-radius:8px;font-size:.95rem;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:border-color .2s,transform .15s;}
+  .btn-outline:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .hero-circle{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:360px;height:360px;border-radius:50%;border:1.5px solid rgba(124,58,237,.28);box-shadow:0 0 80px rgba(124,58,237,.12),inset 0 0 60px rgba(124,58,237,.05);pointer-events:none;}
+
+  /* ABOUT */
+  #about{background:radial-gradient(ellipse 50% 60% at 80% 45%,rgba(76,29,149,.15) 0%,transparent 65%);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .about-text p{font-size:1rem;line-height:1.85;color:rgba(240,234,248,.82);margin-bottom:1.2rem;}
+  .int-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+  .int-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.3rem;transition:background .2s,border-color .2s,transform .2s;}
+  .int-card:hover{background:var(--bg-card-h);border-color:var(--border-h);transform:translateY(-3px);}
+  .int-icon{font-size:1.8rem;margin-bottom:.55rem;}
+  .int-card h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;color:#fff;margin-bottom:.3rem;}
+  .int-card p{font-size:.8rem;color:var(--muted);line-height:1.5;margin:0;}
+
+  /* TECH */
+  #techstack{text-align:center;background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(76,29,149,.13) 0%,transparent 65%);}
+  #techstack .sec-line{margin:0 auto 3rem;}
+  .scroll-wrap{background:rgba(80,40,140,.08);border:1px solid var(--border);border-radius:16px;padding:1.8rem;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--purple) transparent;}
+  .tech-row{display:flex;gap:.9rem;width:max-content;}
+  .tech-card{background:rgba(80,40,140,.18);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;min-width:90px;display:flex;flex-direction:column;align-items:center;gap:.55rem;transition:border-color .2s,background .2s,transform .2s;cursor:default;}
+  .tech-card:hover{border-color:var(--border-h);background:rgba(100,55,170,.28);transform:translateY(-5px);}
+  .tech-card img{width:38px;height:38px;object-fit:contain;}
+  .tech-card span{font-size:.74rem;font-weight:600;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+  .tech-hint{margin-top:1.3rem;font-size:.82rem;color:var(--muted);}
+
+  /* PROJECTS */
+  #projects{background:radial-gradient(ellipse 50% 60% at 20% 60%,rgba(76,29,149,.14) 0%,transparent 65%);}
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+  .proj-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.9rem;position:relative;transition:border-color .2s,background .2s,transform .2s;}
+  .proj-card:hover{border-color:var(--border-h);background:var(--bg-card-h);transform:translateY(-4px);}
+  .proj-arrow{position:absolute;top:1.4rem;right:1.4rem;color:var(--accent);font-size:1rem;}
+  .proj-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;margin-bottom:.6rem;}
+  .proj-card p{font-size:.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.1rem;}
+  .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.4rem;}
+  .tag{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.28);color:var(--accent2);font-size:.72rem;padding:.2rem .65rem;border-radius:20px;font-family:'JetBrains Mono',monospace;}
+  .proj-links{display:flex;gap:.7rem;}
+  .btn-code{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.45rem 1rem;border-radius:6px;font-size:.8rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:border-color .2s;}
+  .btn-code:hover{border-color:var(--purple);}
+  .btn-demo{background:var(--purple);color:#fff;border:none;padding:.45rem 1rem;border-radius:6px;font-size:.8rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:background .2s;}
+  .btn-demo:hover{background:var(--purple-l);}
+
+  /* ACHIEVEMENTS */
+  #achievements{text-align:center;background:radial-gradient(ellipse 55% 50% at 80% 50%,rgba(76,29,149,.13) 0%,transparent 65%);}
+  #achievements .sec-line{margin:0 auto 3rem;}
+  .ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;text-align:left;}
+  .ach-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.9rem 1.5rem;transition:border-color .2s,transform .2s,background .2s;}
+  .ach-card:hover{border-color:var(--border-h);background:var(--bg-card-h);transform:translateY(-4px);}
+  .ach-icon{font-size:2.1rem;margin-bottom:.9rem;}
+  .ach-card h3{font-family:'Montserrat',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.45rem;}
+  .ach-card p{font-size:.82rem;color:var(--muted);line-height:1.55;}
+
+  /* PROFILES */
+  #profiles{text-align:center;background:radial-gradient(ellipse 50% 55% at 50% 50%,rgba(76,29,149,.12) 0%,transparent 65%);}
+  #profiles .sec-line{margin:0 auto 3rem;}
+  .profile-row{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;}
+  .profile-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:2rem 2.4rem;display:flex;flex-direction:column;align-items:center;gap:.65rem;min-width:145px;text-decoration:none;transition:border-color .2s,transform .2s,background .2s;}
+  .profile-card:hover{border-color:var(--border-h);background:var(--bg-card-h);transform:translateY(-5px);}
+  .p-icon{font-size:1.8rem;color:var(--accent);}
+  .profile-card h4{font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:700;color:#fff;}
+  .profile-card span{font-size:.75rem;color:var(--muted);text-align:center;}
+
+  /* CONTACT */
+  #contact{text-align:center;background:radial-gradient(ellipse 55% 50% at 50% 50%,rgba(76,29,149,.14) 0%,transparent 65%);}
+  #contact .sec-line{margin:0 auto 1.2rem;}
+  .contact-sub{max-width:540px;margin:0 auto 3rem;font-size:.97rem;color:var(--muted);line-height:1.75;}
+  .contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;text-align:left;align-items:start;}
+  .contact-left h3{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:.9rem;}
+  .contact-left p{font-size:.9rem;color:var(--muted);line-height:1.7;}
+  .contact-form{display:flex;flex-direction:column;gap:.9rem;}
+  .field{display:flex;flex-direction:column;gap:.35rem;}
+  .field label{font-size:.83rem;font-weight:600;color:var(--text);}
+  .field input,.field textarea{background:rgba(80,40,140,.1);border:1px solid var(--border);border-radius:8px;padding:.72rem 1rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;resize:none;}
+  .field input::placeholder,.field textarea::placeholder{color:var(--muted);}
+  .field input:focus,.field textarea:focus{border-color:var(--purple);}
+  .field textarea{min-height:125px;}
+  .submit-btn{background:var(--purple);color:#fff;border:none;padding:.8rem 2rem;border-radius:8px;font-size:.93rem;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;align-self:flex-start;transition:background .2s;}
+  .submit-btn:hover{background:var(--purple-l);}
+
+  footer{position:relative;z-index:1;text-align:center;padding:1.8rem;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem;}
+
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<nav>
+  <div class="logo">SC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#techstack">Tech Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#profiles">Profiles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-circle"></div>
+  <div class="container">
+    <div class="hero-wrap fade-up">
+      <div class="hero-name">
+        SHRUTI<br>
+        <span class="colored">CHANDRA</span><span class="cursor"></span>
+      </div>
+      <div class="hero-tagline">CS Student &nbsp;|&nbsp; AI/ML Enthusiast &nbsp;|&nbsp; Open Source Contributor</div>
+      <p class="hero-bio">
+        I'm a CSE undergrad at Banasthali Vidyapith exploring life one bug, one build, and one breakthrough at a time.
+        I enjoy crafting solutions to meaningful problems — from machine learning pipelines to clean frontend interfaces.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects ↓</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="sec-title fade-up">About Me</div>
+    <div class="sec-line fade-up"></div>
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <p>I'm a Computer Science Engineering student at Banasthali Vidyapith with a strong foundation in programming, problem-solving, and an ever-growing passion for AI/ML and software engineering.</p>
+        <p>My journey combines technical depth with curiosity — whether building end-to-end machine learning systems, contributing to open source, or exploring the intersection of clean code and thoughtful design.</p>
+        <p>Beyond coding, I believe in discipline, continuous learning, and building things that actually matter. From hackathons to Harvard certifications, I chase growth relentlessly.</p>
+      </div>
+      <div class="int-grid">
+        <div class="int-card"><div class="int-icon">🤖</div><h4>AI & Machine Learning</h4><p>Building intelligent systems from first principles</p></div>
+        <div class="int-card"><div class="int-icon">🎨</div><h4>UI/UX Design</h4><p>Turning ideas into clean, user-friendly interfaces</p></div>
+        <div class="int-card"><div class="int-icon">🔓</div><h4>Open Source</h4><p>Contributing to GSSoC and community projects</p></div>
+        <div class="int-card"><div class="int-icon">⚙️</div><h4>Backend Engineering</h4><p>Data-driven solutions with structured, efficient code</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="techstack">
+  <div class="container">
+    <div class="sec-title fade-up">I Build With</div>
+    <div class="sec-line fade-up"></div>
+    <div class="scroll-wrap fade-up">
+      <div class="tech-row">
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"><span>C</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"><span>C++</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL"><span>SQL</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"><span>HTML5</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3"><span>CSS3</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas"><span>Pandas</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"><span>NumPy</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg" alt="Scikit"><span>Scikit-learn</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/streamlit/streamlit-original.svg" alt="Streamlit"><span>Streamlit</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"><span>Git</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="filter:invert(1) brightness(.85)"><span>GitHub</span></div>
+        <div class="tech-card"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VSCode"><span>VS Code</span></div>
+      </div>
+    </div>
+    <div class="tech-hint fade-up">Scroll right to see the full tech arsenal →</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-title fade-up">Featured Projects</div>
+    <div class="sec-line fade-up"></div>
+    <div class="proj-grid fade-up">
+      <div class="proj-card">
+        <div class="proj-arrow">↗</div>
+        <h3>Transaction Fraud Detection</h3>
+        <p>End-to-end fraud detection system using Python and Scikit-learn. Trained and deployed an ML pipeline to classify transactions as fraudulent or genuine, with a live Streamlit interface for real-time prediction.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Streamlit</span><span class="tag">Pandas</span></div>
+        <div class="proj-links"><a href="https://github.com/shruti030906" target="_blank" class="btn-code">⌥ Code</a><a href="#" class="btn-demo">Demo ↗</a></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-arrow">↗</div>
+        <h3>YouTube Clone</h3>
+        <p>Responsive YouTube UI clone built with HTML and CSS. Implemented Flexbox and Grid layouts for full cross-device compatibility and a pixel-perfect replication of the platform's design system.</p>
+        <div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Flexbox</span><span class="tag">Grid</span></div>
+        <div class="proj-links"><a href="https://github.com/shruti030906" target="_blank" class="btn-code">⌥ Code</a><a href="#" class="btn-demo">Demo ↗</a></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-arrow">↗</div>
+        <h3>Netflix Clone</h3>
+        <p>Static Netflix homepage clone showcasing modern UI design principles with clean component structure, consistent visual hierarchy, and responsive layout techniques.</p>
+        <div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">UI Design</span></div>
+        <div class="proj-links"><a href="https://github.com/shruti030906" target="_blank" class="btn-code">⌥ Code</a><a href="#" class="btn-demo">Demo ↗</a></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-arrow">↗</div>
+        <h3>GSSoC Contributions</h3>
+        <p>Active open source contributor at GirlScript Summer of Code 2025. Collaborated on community-led projects, submitted pull requests, and improved real-world codebases across diverse domains.</p>
+        <div class="tags"><span class="tag">Open Source</span><span class="tag">Collaboration</span><span class="tag">Git</span></div>
+        <div class="proj-links"><a href="https://github.com/shruti030906" target="_blank" class="btn-code">⌥ Code</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="sec-title fade-up">Achievements</div>
+    <div class="sec-line fade-up"></div>
+    <div class="ach-grid fade-up">
+      <div class="ach-card"><div class="ach-icon">🏆</div><h3>Smart India Hackathon</h3><p>Selected in Internal Hackathon Round for SIH 2025 — competing with innovative tech solutions</p></div>
+      <div class="ach-card"><div class="ach-icon">🎓</div><h3>Harvard CS50 AI</h3><p>Certified in CS50's Introduction to Artificial Intelligence with Python by Harvard University</p></div>
+      <div class="ach-card"><div class="ach-icon">🚀</div><h3>GSSoC 2025</h3><p>Open source contributor at GirlScript Summer of Code — contributing to impactful community projects</p></div>
+      <div class="ach-card"><div class="ach-icon">💼</div><h3>JPMorganChase Simulation</h3><p>Completed Software Engineering Job Simulation via Forage gaining industry-level engineering exposure</p></div>
+      <div class="ach-card"><div class="ach-icon">🔗</div><h3>Web3 & Blockchain</h3><p>SheFi Scholar — exploring decentralized finance and blockchain through technical deep dives</p></div>
+      <div class="ach-card"><div class="ach-icon">🌐</div><h3>Technovation 2020</h3><p>Participant in the global entrepreneurship and technology challenge for young innovators</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section id="profiles">
+  <div class="container">
+    <div class="sec-title fade-up">Find Me Online</div>
+    <div class="sec-line fade-up"></div>
+    <div class="profile-row fade-up">
+      <a href="https://github.com/shruti030906" target="_blank" class="profile-card"><div class="p-icon">🐙</div><h4>GitHub</h4><span>Code and projects</span></a>
+      <a href="https://www.linkedin.com/in/shrutichandra-573294342" target="_blank" class="profile-card"><div class="p-icon">🔗</div><h4>LinkedIn</h4><span>Professional network</span></a>
+      <a href="mailto:shrutichandra0903@gmail.com" class="profile-card"><div class="p-icon">✉️</div><h4>Email</h4><span>Get in touch</span></a>
+      <a href="#" class="profile-card"><div class="p-icon">⛓️</div><h4>SheFi</h4><span>Web3 learning</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-title fade-up">Get In Touch</div>
+    <div class="sec-line fade-up"></div>
+    <p class="contact-sub fade-up">Whether you have a question or just want to say hi, feel free to reach out. I'm always excited to discuss ideas, opportunities, and collaborate on interesting projects.</p>
+    <div class="contact-wrap fade-up">
+      <div class="contact-left">
+        <h3>Let's Connect</h3>
+        <p>Have a proposal or just want to chat about tech? Drop me an email or fill out the form — I'll get back to you as soon as possible.</p>
+      </div>
+      <div class="contact-form">
+        <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+        <div class="field"><label>Message</label><textarea placeholder="Your message..."></textarea></div>
+        <button class="submit-btn">Send Message ↗</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2025 Shruti Chandra · Built with passion &amp; curiosity</p></footer>
+
+<script>
+// STARFIELD
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [];
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+function makeStars() {
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.3+.2, a: Math.random()*.8+.1, da: (Math.random()-.5)*.005 });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  for (let i=0;i<stars.length;i++) {
+    for (let j=i+1;j<stars.length;j++) {
+      const dx=stars[i].x-stars[j].x, dy=stars[i].y-stars[j].y, d=Math.sqrt(dx*dx+dy*dy);
+      if (d<120) {
+        ctx.beginPath(); ctx.moveTo(stars[i].x,stars[i].y); ctx.lineTo(stars[j].x,stars[j].y);
+        ctx.strokeStyle=`rgba(124,58,237,${.08*(1-d/120)})`; ctx.lineWidth=.7; ctx.stroke();
+      }
+    }
+  }
+  stars.forEach(s => {
+    s.a+=s.da; if(s.a>.95||s.a<.05) s.da*=-1;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(200,180,255,${s.a})`; ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize',()=>{resize();makeStars();});
+resize(); makeStars(); draw();
+
+// SCROLL FADE
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+window.addEventListener('load',()=>{
+  setTimeout(()=>{ document.querySelectorAll('#home .fade-up').forEach(el=>el.classList.add('visible')); },120);
+});
+</script>
+</body>
+</html>
