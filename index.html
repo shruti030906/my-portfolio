@@ -19,6 +19,29 @@
     --border:    rgba(124,58,237,0.22);
     --border-h:  rgba(168,85,247,0.45);
   }
+  .hero-circle {
+  position:absolute;
+  right:5%;
+  top:50%;
+  transform:translateY(-50%);
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  border:1.5px solid rgba(124,58,237,.28);
+  box-shadow:0 0 80px rgba(124,58,237,.12),
+             inset 0 0 60px rgba(124,58,237,.05);
+  overflow:hidden;   /* IMPORTANT */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{background:var(--bg-deep);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
@@ -153,7 +176,9 @@
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero-circle"></div>
+  <div class="hero-circle">
+  <img src="your-image.jpg" alt="profile" class="hero-img">
+  </div>
   <div class="container">
     <div class="hero-wrap fade-up">
       <div class="hero-name">
